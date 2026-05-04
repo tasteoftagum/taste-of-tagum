@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Stories — Taste of Tagum</title>
+<meta name="description" content="Stories, guides, and hidden gems from Tagum City, Davao del Norte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-header {
+    background: var(--warm-white);
+    padding: 80px 80px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark-green);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .page-header .label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--green);
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .page-header p {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-light);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  .articles-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  .article-card {
+    background: var(--cream);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .article-card:hover { background: var(--warm-white); }
+
+  .article-card-image {
+    background: #d4cfc8;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .article-card-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .article-card-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #a09890;
+  }
+
+  .article-card-image-placeholder span {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .article-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--green);
+    color: var(--ink);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .article-card-body { padding: 32px 36px 40px; flex: 1; }
+
+  .article-meta {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+  }
+
+  .article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+
+  .article-excerpt {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink-light);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .article-read {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dark-green);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .article-read::after { content: '→'; }
+
+  /* COMING SOON CARDS */
+  .coming-soon-card {
+    background: var(--cream);
+    padding: 32px 36px 40px;
+    border-left: 3px solid var(--border);
+    opacity: 0.6;
+  }
+
+  .coming-soon-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .coming-soon-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .coming-soon-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink-muted);
+  }
+
+  @media (max-width: 900px) {
+    .page-header { padding: 48px 24px 40px; }
+    .articles-grid { grid-template-columns: 1fr; padding: 0; border: none; background: transparent; gap: 1px; }
+    .article-card-body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <span class="name">Taste of Tagum</span>
+    <span class="sub">Davao del Norte</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="blog.html">Eats</a></li>
+    <li><a href="blog.html">Stories</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><span class="nav-tag">Local Guide</span></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="label">All Stories</p>
+  <h1>Real Tagum.<br>Real Stories.</h1>
+  <p>Street food, hidden gems, and the people behind them. Written by a local, for everyone.</p>
+</div>
+
+<div class="articles-grid">
+
+  <!-- ARTICLE 1 — LIVE -->
+  <a href="articles/street-food-tagum.html" class="article-card">
+    <div class="article-card-image">
+      <!-- REPLACE: <img src="images/street-food-cover.jpg" alt="Street food Tagum City Rizal Street"> -->
+      <div class="article-card-image-placeholder">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Add your photo here</span>
+      </div>
+      <span class="article-tag">Street Food</span>
+    </div>
+    <div class="article-card-body">
+      <p class="article-meta">May 2026 · Tagum City</p>
+      <h2 class="article-title">Why Tagum City Has the Best Street Food You've Never Heard Of</h2>
+      <p class="article-excerpt">There is a version of Tagum City that tourists don't see in brochures. It doesn't happen in the morning. It doesn't happen inside restaurants. It happens at around 4 or 5 in the afternoon, when the city exhales...</p>
+      <span class="article-read">Read the story</span>
+    </div>
+  </a>
+
+  <!-- COMING SOON 1 -->
+  <div class="coming-soon-card">
+    <p class="coming-soon-label">Coming Soon</p>
+    <h3 class="coming-soon-title">The Maruya Vendor Who's Been Here Since Before You Were Born</h3>
+  </div>
+
+  <!-- COMING SOON 2 -->
+  <div class="coming-soon-card">
+    <p class="coming-soon-label">Coming Soon</p>
+    <h3 class="coming-soon-title">Where Tagum Eats When the Sun Goes Down</h3>
+  </div>
+
+  <!-- COMING SOON 3 -->
+  <div class="coming-soon-card">
+    <p class="coming-soon-label">Coming Soon</p>
+    <h3 class="coming-soon-title">One Afternoon, Five Stalls, Less Than ₱50 Spent</h3>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <div class="name">Taste of Tagum</div>
+    <p>Discovering the street food, hidden gems, and real stories of Tagum City, Davao del Norte — one bite at a time.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <ul>
+      <li><a href="blog.html">All Stories</a></li>
+      <li><a href="articles/street-food-tagum.html">Street Food Guide</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Tagum City</h4>
+    <ul>
+      <li><a href="#">Davao del Norte</a></li>
+      <li><a href="#">Rizal Street</a></li>
+      <li><a href="#">Historical Center</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Taste of Tagum. Tagum City, Davao del Norte.</p>
+  <p class="made-by">Written & built by a <span>local</span></p>
+</div>
+
+</body>
+</html>
